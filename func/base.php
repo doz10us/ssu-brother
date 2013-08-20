@@ -1,8 +1,8 @@
 <?php
 function ns_connect(&$data) {
-$hostname = '';
-$username = '';
-$password = '';
+$hostname = getauth('nshost');
+$username = getauth('nsuser');
+$password = getauth('nspass');
 
 $db = mysql_connect($hostname, $username, $password) or die('connect to database failed');
 mysql_set_charset('utf8');
@@ -44,9 +44,9 @@ return("OK");
 }
 
 function fhosting($data, &$mydata, $trigger) {
-$hostname = '';
-$username = '';
-$password = '';
+$hostname = getauth('fhhost');
+$username = getauth('fhuser');
+$password = getauth('fhpass');
 
 $db = mysql_connect($hostname, $username, $password) or die('connect to database failed');
 mysql_select_db('portmap') or die('db not found');
