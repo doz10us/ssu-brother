@@ -2,7 +2,7 @@
 include ("login.php");
 function ns_connect(&$data) {
 $hostname = $nshost;
-$username = $nsuser;
+$username = $nslogin;
 $password = $nspass;
 
 $db = mysql_connect($hostname, $username, $password) or die('connect to database failed');
@@ -50,7 +50,7 @@ return("OK");
 
 function fhosting(&$data, &$mydata, &$trigger) {
 $hostname = $fhhost;
-$username = $fhuser;
+$username = $fhlogin;
 $password = $fhpass;
 
 $db = mysql_connect($hostname, $username, $password) or die('connect to database failed');
