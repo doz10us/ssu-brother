@@ -35,20 +35,20 @@ function getdata(&$data, &$mydata, &$trigger) {
             header('Location: index.php?logout');
             exit;
         } elseif (isset($_POST['submit'])) {
-            $mydata['ip'] = getip(); //$_REQUEST['ip'];
+            $mydata['ip'] = getip(); //$_POST['ip'];
             //$mydata['ip'] = "212.193.33.253";
-            $mydata['mac'] = $_REQUEST['mac'];
-            $mydata['swname'] = $_REQUEST['swname'];
-            $mydata['port'] = $_REQUEST['port'];
-            $mydata['name'] = $_REQUEST['name'];
-            $mydata['building'] = $_REQUEST['building'];
-            $mydata['floor'] = $_REQUEST['floor'];
-            $mydata['description'] = $_REQUEST['description'];
-            $mydata['room'] = $_REQUEST['room'];
-            $mydata['history'] = $_REQUEST['history'];
-            $mydata['update'] = $_REQUEST['update'];
+            $mydata['mac'] = $_POST['mac'];
+            $mydata['swname'] = $_POST['swname'];
+            $mydata['port'] = $_POST['port'];
+            $mydata['name'] = $_POST['name'];
+            $mydata['building'] = $_POST['building'];
+            $mydata['floor'] = $_POST['floor'];
+            $mydata['description'] = $_POST['description'];
+            $mydata['room'] = $_POST['room'];
+            $mydata['history'] = $_POST['history'];
+            $mydata['update'] = $_POST['update'];
             $data = $mydata;
-            $trigger = htmlspecialchars($_REQUEST['trigger'], ENT_QUOTES);
+            $trigger = htmlspecialchars($_POST['trigger'], ENT_QUOTES);
             foreach($mydata as $key => &$val){
                 $val = htmlspecialchars($val, ENT_QUOTES);
             }
@@ -57,7 +57,10 @@ function getdata(&$data, &$mydata, &$trigger) {
                 $val = trim($val);
             }
             unset($val);
-        } else die('Invalid data sent');
+        } else {
+            $data['ip'] = getip();
+            $trigger = "SELECT";
+        }
     } else {
         //$data['ip'] = "212.193.33.253";
         $data['ip'] = getip();
