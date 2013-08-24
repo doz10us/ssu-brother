@@ -35,8 +35,8 @@ function getdata(&$data, &$mydata, &$trigger) {
             header('Location: index.php?logout');
             exit;
         } elseif (isset($_POST['submit'])) {
-            $mydata['ip'] = getip(); //$_POST['ip'];
-            //$mydata['ip'] = "212.193.33.253";
+            //$mydata['ip'] = getip(); //$_POST['ip'];
+            $mydata['ip'] = "212.193.33.198";
             $mydata['mac'] = $_POST['mac'];
             $mydata['swname'] = $_POST['swname'];
             $mydata['port'] = $_POST['port'];
@@ -58,12 +58,13 @@ function getdata(&$data, &$mydata, &$trigger) {
             }
             unset($val);
         } else {
-            $data['ip'] = getip();
+            $data['ip'] = "212.193.33.198";
+            //$data['ip'] = getip();
             $trigger = "SELECT";
         }
     } else {
-        //$data['ip'] = "212.193.33.253";
-        $data['ip'] = getip();
+        $data['ip'] = "212.193.33.198";
+        //$data['ip'] = getip();
         $trigger = "SELECT";
     }
 }
