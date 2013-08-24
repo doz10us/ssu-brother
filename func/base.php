@@ -109,7 +109,8 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 //$result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
                 echo $trigger.", ";
                 $trigger="";
-                //fhosting($data, $mydata, $trigger);
+                fhosting($data, $mydata, $trigger);
+                die();
             }
         }
         echo "I know you!";
