@@ -1,5 +1,5 @@
 <?php
-include_once ("func/login.php");
+include_once ("login.php");
 function ns_connect(&$data) {
 $hostname = $nshost;
 $username = $nsuser;
