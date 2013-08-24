@@ -27,10 +27,6 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
 			fhosting($data, $mydata, $trigger);
 			form($data, $mydata, $trigger);
 			break;
-		case "NOIP":
-			fhosting($data, $mydata, $trigger);
-			form($data, $mydata, $trigger);
-			break;
 		case "AUTO":
 			ns_connect($data);
 			$mydata['mac'] = $data['mac'];
