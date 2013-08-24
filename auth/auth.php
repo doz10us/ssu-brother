@@ -27,8 +27,8 @@ if (isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))
 //Если пользователь не аутентифицирован, то проверить его используя LDAP
 if (isset($_POST['login']) && isset($_POST['password']))
       {
-      $username = $_POST['login'];
-      $login = $_POST['login'].$domain;
+      $username = trim(htmlspecialchars($_POST['login']));
+      $login = trim(htmlspecialchars($_POST['login'])).$domain;
       $password = $_POST['password'];
       //подсоединяемся к LDAP серверу
       $ldap = ldap_connect('212.193.33.11') or die("Cant connect to LDAP Server");
@@ -46,7 +46,13 @@ if (isset($_POST['login']) && isset($_POST['password']))
                   $result = ldap_search($ldap,$base,"(&(memberOf=".$memberof.")(".$filter.$username."))");
                   // Получаем количество результатов предыдущей проверки
                   $result_ent = ldap_get_entries($ldap,$result);
-                  //echo "$result_ent";
+                  //print_r ($result_ent);
+                  if ($result_ent['count'] == 0) {
+						$result = ldap_search($ldap,$base2,"(&(memberOf=".$memberof.")(".$filter.$username."))");
+						$result_ent = ldap_get_entries($ldap,$result);
+					}
+				//echo "<br><br>";
+				//print_r ($result_ent);
             }
             else
                   {

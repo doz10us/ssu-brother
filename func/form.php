@@ -10,6 +10,7 @@ function form($data, $mydata, $trigger) {	// This will print html form for data 
 		default:
 			$text = "Подтвердить";
 	}
+	//echo "<br> $trigger";
 	echo '<form method="post">';
 	echo '<table>';
 	echo '<tr>';
@@ -21,6 +22,7 @@ function form($data, $mydata, $trigger) {	// This will print html form for data 
 	if ($mydata['mac']) { 
 		echo '<td>'.$mydata['mac'].'</td>';
 		echo '</tr>';
+		echo '<p><input type="hidden" name="mac" value="'.$mydata['mac'].'"/></p>';
 		echo '<tr>';
 		echo '<td>Switch:</td>';
 		if ($data['swname'] == $mydata['swname'] && $data['port'] == $mydata['port']) { echo '<td>'.$data['swname'].':'.$data['port'].'</td>'; } else { echo '<td>'.$data['swname'].':'.$data['port'].' (<font color="red">'.$mydata['swname'].':'.$mydata['port'].'</font>)</td>'; } 
@@ -50,11 +52,14 @@ function form($data, $mydata, $trigger) {	// This will print html form for data 
 	echo '</tr>';
 	echo '<p><input type="hidden" name="trigger" value="'.$trigger.'"/></p>';
 	echo '<p><input type="hidden" name="ip" value="'.$data['ip'].'"/></p>';
-	echo '<p><input type="hidden" name="mac" value="'.$mydata['mac'].'"/></p>';
 	echo '<p><input type="hidden" name="swname" value="'.$data['swname'].'"/></p>';
 	echo '<p><input type="hidden" name="port" value="'.$data['port'].'"/></p>';
 	echo '<p><input type="hidden" name="history" value="'.$mydata['history'].'"/></p>';
 	echo '<p><input type="hidden" name="update" value="'.$mydata['update'].'"/></p>';
+	echo '<tr>';
+	echo '	<td>Обновлено:</td>';
+	echo '	<td>'.$mydata['update'].'</td>';
+	echo '</tr>';
 	echo '<tr><td><input type="submit" name="submit" value="'.$text.'"/></td>';
 	echo '<td><input type="submit" name="logout" value="Выйти"/></td></tr>';
 	echo '</table>';
