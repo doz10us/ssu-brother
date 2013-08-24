@@ -1,5 +1,5 @@
 <?php
-function form($data, $mydata, &$trigger) {	// This will print html form for data update
+function form($data, $mydata, $trigger) {	// This will print html form for data update
 	switch ($trigger) {
 		case "INSERT":
 			$text = "Добавить запись";
