@@ -1,6 +1,9 @@
 <?php
 include ("login.php");
 function ns_connect(&$data) {
+    global $nshost;
+    global $nslogin;
+    global $nspass;
 $hostname = $nshost;
 $username = $nslogin;
 $password = $nspass;
@@ -49,6 +52,9 @@ return("OK");
 }
 
 function fhosting(&$data, &$mydata, &$trigger) {
+    global $fhhost;
+    global $fhlogin;
+    global $fhpass;
 $hostname = $fhhost;
 $username = $fhlogin;
 $password = $fhpass;
