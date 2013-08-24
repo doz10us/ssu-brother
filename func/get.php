@@ -47,9 +47,9 @@ function getdata(&$data, &$mydata, &$trigger) {
             $mydata['room'] = $_POST['room'];
             $mydata['history'] = $_POST['history'];
             $mydata['update'] = $_POST['update'];
-            $trigger = htmlspecialchars($_POST['trigger'], ENT_QUOTES);
-            echo "Trigger is ".$trigger."<br>";
-            die();
+            $trigger = "DO";//htmlspecialchars($_POST['trigger'], ENT_QUOTES);
+            //echo "Trigger is ".$trigger."<br>";
+            //die();
             foreach($mydata as $key => &$val){
                 $val = htmlspecialchars($val, ENT_QUOTES);
             }
