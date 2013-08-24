@@ -93,7 +93,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         }
         if (isset($trigger)) {
             if (array_diff_assoc($mydata, $temp)){
-               /* $query="UPDATE `netmap` SET ";
+
                 if ($mydata['ip'] != $temp['ip'] ) $query .= "`ip`=INET_ATON('".$mydata['ip']."')";
                 if ($mydata['mac'] != $temp['mac']) $query .= ",`mac`='".$mydata['mac']."'";
                 if ($mydata['port'] != $temp['port']) $query .= ",`port`='".$mydata['port']."'";
@@ -103,11 +103,14 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 if ($mydata['floor'] != $temp['floor']) $query .= ",`floor`='".$mydata['floor']."'";
                 if ($mydata['room'] != $temp['room']) $query .= ",`room`='".$mydata['room']."'";
                 if ($mydata['description'] != $temp['description']) $query .= ",`description`='".$mydata['description']."'";
+                if (isset($query)) {
+                    $query = "UPDATE `netmap` SET ".$query;
+                    echo $query;
+                }
                 $query .= ",`history`='".$mydata['mac']." ".$mydata['ip']." ".$mydata['port']." ".$mydata['swname']." ".$mydata['name']." ".$mydata['building']." ".$mydata['floor']." ".$mydata['room']." ".$mydata['description']." ".$temp['update']." \n".$temp['history']."' WHERE `mac`='".$temp['mac']."' OR `ip`=INET_ATON('".$temp['ip']."');";
-                */
+
                 //$query="UPDATE `netmap` SET `ip`=INET_ATON('".$mydata['ip']."'),`mac`='".$mydata['mac']."',`port`='".$mydata['port']."',`switch_id`='".$mydata['swname']."',`workstation`='".$mydata['name']."',`building`='".$mydata['building']."',`floor`='".$mydata['floor']."',`room`='".$mydata['room']."',`description`='".$mydata['description']."',`history`='".$mydata['mac']." ".$mydata['ip']." ".$mydata['port']." ".$mydata['swname']." ".$mydata['name']." ".$mydata['building']." ".$mydata['floor']." ".$mydata['room']." ".$mydata['description']." ".$temp['update']." \n".$temp['history']."' WHERE `mac`='".$temp['mac']."' OR `ip`=INET_ATON('".$temp['ip']."');";
                 //$result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
-                echo $trigger.", ";
                 unset($trigger);
                 fhosting($data, $mydata, $trigger);
                 die();
@@ -118,7 +121,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         if (isset($trigger)) {
             $query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
             $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
-            $trigger = "";
+            unset($trigger);
             fhosting($data, $mydata, $trigger);
         }
         echo "What's your name?";
