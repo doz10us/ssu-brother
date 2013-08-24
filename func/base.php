@@ -70,7 +70,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         $query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE mac = '".$data['mac']."'";
         $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
     }
-
+    unset($query);
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
             $temp['ip']	= $row['INET_NTOA(ip)'];
