@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+error_reporting(0);
+
 include_once("func/var.php");
 include_once("func/form.php");
 include_once("func/get.php");
