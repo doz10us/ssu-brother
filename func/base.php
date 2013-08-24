@@ -91,6 +91,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
             $mydata['swname'] = $data['swname'];
             $mydata['port'] = $data['port'];
         }
+        echo "Trigger is".$trigger."<br>";
         if (!(empty($trigger))) {
             if (array_diff_assoc($mydata, $temp)){
                 $query="";
