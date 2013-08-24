@@ -62,7 +62,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
     $db = mysql_connect($hostname, $username, $password) or die('connect to database failed');
     mysql_select_db('portmap') or die('db not found');
 
-    if (isset($data['mac'])) { $mydata['mac'] = $data['mac']; } else { $data['mac'] = $mydata['mac']; }
+    if (!(empty($data['mac']))) { $mydata['mac'] = $data['mac']; } else { $data['mac'] = $mydata['mac']; }
     if (empty($data['mac']) && empty($mydata['mac'])) {
         $query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE ip = INET_ATON('".$mydata['ip']."')";
         $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
@@ -91,7 +91,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
             $mydata['swname'] = $data['swname'];
             $mydata['port'] = $data['port'];
         }
-        if (isset($trigger)) {
+        if (!(empty($trigger))) {
             if (array_diff_assoc($mydata, $temp)){
                 $query="";
                 if ($mydata['ip'] != $temp['ip'] ) $query .= "`ip`=INET_ATON('".$mydata['ip']."')";
@@ -115,7 +115,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         }
         echo "I know you!";
     } else {
-        if (isset($trigger)) {
+        if (!(empty($trigger))) {
             $query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
             $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
             unset($trigger);
