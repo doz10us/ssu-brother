@@ -47,7 +47,6 @@ function getdata(&$data, &$mydata, &$trigger) {
             $mydata['room'] = $_POST['room'];
             $mydata['history'] = $_POST['history'];
             $mydata['update'] = $_POST['update'];
-            $data = $mydata;
             $trigger = htmlspecialchars($_POST['trigger'], ENT_QUOTES);
             foreach($mydata as $key => &$val){
                 $val = htmlspecialchars($val, ENT_QUOTES);
@@ -57,13 +56,14 @@ function getdata(&$data, &$mydata, &$trigger) {
                 $val = trim($val);
             }
             unset($val);
+            $data = $mydata;
+            $mydata['name'] = iconv('WINDOWS-1251', 'UTF-8',$mydata['name']);
+            $mydata['room'] = iconv('WINDOWS-1251', 'UTF-8',$mydata['room']);
         } else {
             $data['ip'] = getip();
-            $trigger = "SELECT";
         }
     } else {
         $data['ip'] = getip();
-        $trigger = "SELECT";
     }
 }
 ?>
