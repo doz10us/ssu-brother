@@ -103,7 +103,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 if ($mydata['floor'] != $temp['floor']) $query .= ",`floor`='".$mydata['floor']."'";
                 if ($mydata['room'] != $temp['room']) $query .= ",`room`='".$mydata['room']."'";
                 if ($mydata['description'] != $temp['description']) $query .= ",`description`='".$mydata['description']."'";
-                $query .= ",`history`='".$mydata['mac']." ".$mydata['ip']." ".$mydata['port']." ".$mydata['swname']." ".$mydata['name']." ".$mydata['building']." ".$mydata['floor']." ".$mydata['room']." ".$mydata['description']." ".$mydata['update']." \n".$mydata['history']."' WHERE `mac`='".$mydata['mac']."' OR `ip`=INET_ATON('".$mydata['ip']."');";
+                $query .= ",`history`='".$mydata['mac']." ".$mydata['ip']." ".$mydata['port']." ".$mydata['swname']." ".$mydata['name']." ".$mydata['building']." ".$mydata['floor']." ".$mydata['room']." ".$mydata['description']." ".$temp['update']." \n".$temp['history']."' WHERE `mac`='".$temp['mac']."' OR `ip`=INET_ATON('".$temp['ip']."');";
                 $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
                 $trigger="";
                 fhosting($data, $mydata, $trigger);
