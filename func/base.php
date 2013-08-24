@@ -93,7 +93,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         }
         if (isset($trigger)) {
             if (array_diff_assoc($mydata, $temp)){
-
+                $query="";
                 if ($mydata['ip'] != $temp['ip'] ) $query .= "`ip`=INET_ATON('".$mydata['ip']."')";
                 if ($mydata['mac'] != $temp['mac']) $query .= ",`mac`='".$mydata['mac']."'";
                 if ($mydata['port'] != $temp['port']) $query .= ",`port`='".$mydata['port']."'";
