@@ -103,7 +103,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 if ($mydata['floor'] != $temp['floor']) $query .= ",`floor`='".$mydata['floor']."'";
                 if ($mydata['room'] != $temp['room']) $query .= ",`room`='".$mydata['room']."'";
                 if ($mydata['description'] != $temp['description']) $query .= ",`description`='".$mydata['description']."'";
-                if (isset($query)) {
+                if (!(empty($query))) {
                     $query = "UPDATE `netmap` SET ".$query;
                     echo $query;
                 }
