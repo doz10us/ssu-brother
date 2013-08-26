@@ -4,11 +4,11 @@ function ns_connect(&$data) {
     global $nshost;
     global $nslogin;
     global $nspass;
-    $hostname = $nshost;
-    $username = $nslogin;
-    $password = $nspass;
+   // $hostname = $nshost;
+   // $username = $nslogin;
+   // $password = $nspass;
 
-    $db = mysql_connect($hostname, $username, $password) or die('connect to database failed');
+    $db = mysql_connect($nshost, $nslogin, $nspass) or die('connect to database failed');
     mysql_set_charset('utf8');
     mysql_select_db('netmap') or die('db not found');
 
