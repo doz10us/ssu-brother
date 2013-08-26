@@ -50,7 +50,7 @@ function form($data, $mydata, $trigger) {	// This will print html form for data 
 	echo '	<td>Комментарий:</td>';
 	echo '	<td><input type="text" name="description" value="'.$mydata['description'].'"/></td>';
 	echo '</tr>';
-	echo '<p><input type="hidden" name="trigger" value="'.$trigger.'"/></p>';
+//	echo '<p><input type="hidden" name="trigger" value="'.$trigger.'"/></p>';
 	echo '<p><input type="hidden" name="ip" value="'.$data['ip'].'"/></p>';
 	echo '<p><input type="hidden" name="swname" value="'.$data['swname'].'"/></p>';
 	echo '<p><input type="hidden" name="port" value="'.$data['port'].'"/></p>';

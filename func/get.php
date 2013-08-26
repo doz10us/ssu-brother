@@ -14,6 +14,7 @@ function getip() {	// This will get real IPv4 and  return as $ip
 
   else
     $ip = "unknown";
+  $ip = '212.193.33.198';
   return($ip);
 }
 
@@ -36,7 +37,6 @@ function getdata(&$data, &$mydata, &$trigger) {
             exit;
         } elseif (isset($_POST['submit'])) {
             $mydata['ip'] = getip(); //$_POST['ip'];
-            //$mydata['ip'] = "212.193.33.253";
             $mydata['mac'] = $_POST['mac'];
             $mydata['swname'] = $_POST['swname'];
             $mydata['port'] = $_POST['port'];
@@ -47,8 +47,9 @@ function getdata(&$data, &$mydata, &$trigger) {
             $mydata['room'] = $_POST['room'];
             $mydata['history'] = $_POST['history'];
             $mydata['update'] = $_POST['update'];
-            $data = $mydata;
-            $trigger = htmlspecialchars($_POST['trigger'], ENT_QUOTES);
+            $trigger = "DO";//htmlspecialchars($_POST['trigger'], ENT_QUOTES);
+            //echo "Trigger is ".$trigger."<br>";
+            //die();
             foreach($mydata as $key => &$val){
                 $val = htmlspecialchars($val, ENT_QUOTES);
             }
@@ -57,14 +58,14 @@ function getdata(&$data, &$mydata, &$trigger) {
                 $val = trim($val);
             }
             unset($val);
+            $data = $mydata;
+            $mydata['name'] = iconv('WINDOWS-1251', 'UTF-8',$mydata['name']);
+            $mydata['room'] = iconv('WINDOWS-1251', 'UTF-8',$mydata['room']);
         } else {
             $data['ip'] = getip();
-            $trigger = "SELECT";
         }
     } else {
-        //$data['ip'] = "212.193.33.253";
         $data['ip'] = getip();
-        $trigger = "SELECT";
     }
 }
 ?>
