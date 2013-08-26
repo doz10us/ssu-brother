@@ -3,6 +3,7 @@ session_start();
 
 include_once("func/var.php");
 include_once("func/form.php");
+include_once("func/ip.php");
 include_once("func/get.php");
 include_once("func/base.php");
 

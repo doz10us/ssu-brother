@@ -1,8 +1,8 @@
 <?php
-// Подключаем файл auth.php
+
+include_once("func/ip.php");
 include_once ("auth/auth.php");
 
-//Хидер
 ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=koi8-r" />
@@ -10,8 +10,6 @@ include_once ("auth/auth.php");
 </head>
 <?php
 
-
-// Форма для ввода пароля и логина
 echo "<h3>Для авторизации необходимы ваши учетные данные</h3>";
 print '
 <form action="index.php" method="post">
