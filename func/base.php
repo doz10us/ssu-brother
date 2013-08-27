@@ -125,7 +125,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         }
         $string = $temp['ip']." ".$temp['mac']." ".$temp['swname'].":".$temp['port']." ".$temp['name']." ".$temp['building']."-".$temp['floor']."-".$temp['room']." ".$temp['description'];
         getlog($string, "3");
-        echo "I know you!";
+        //echo "I know you!";
     } else {
         if (!(empty($trigger))) {
             $query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
@@ -137,7 +137,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
             return("OK");
         }
         getlog("", "4");
-        echo "What's your name?";
+        //echo "What's your name?";
     }
     $mydata = $temp;
 
