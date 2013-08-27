@@ -1,5 +1,6 @@
 <?php
 include ("login.php");
+include ("log.php");
 function ns_connect(&$data) {
     global $nshost;
     global $nslogin;
@@ -120,7 +121,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 return("OK");
             }
         }
-        $string = $mydata['ip']." ".$mydata['mac']." ".$mydata['swname'].":".$mydata['port']." ".$mydata['name']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
+        $string = $temp['ip']." ".$temp['mac']." ".$temp['swname'].":".$temp['port']." ".$temp['name']." ".$temp['building']."-".$temp['floor']."-".$temp['room']." ".$temp['description'];
         getlog($string, "3");
         echo "I know you!";
     } else {
