@@ -23,7 +23,8 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '<td>IP</td>';
     echo '<td>Действие</td>';
     echo '<tr>';
-    $i=0;
+    $i=count($file);
+    $i= 0;
     foreach ($file as $num => $content) {
         $split = split(" ", $content, 3);
         echo '<tr>';
