@@ -25,15 +25,7 @@ function getip() {	// This will get real IPv4 and  return as $ip
     return($ip);
 }
 
-function checkip($ip) {	// ---- This'll check if IP's from our pool
-    $ssu = preg_match('/^212\.193\.\d{1,3}\.\d{1,3}\z/', $ip);
-    //$live = preg_match('/^192\.168\.\d{1,3}\.\d{1,3}\z/', $ip);
-    if ($ssu) {
-        $valid = "1";
-    } else {
-        $valid = "0";
-    }
-
-    return($valid);
+function checkip($ip) {
+    return(preg_match('/^212\.193\.\d{1,3}\.\d{1,3}\z/', $ip));
 }
 ?>
