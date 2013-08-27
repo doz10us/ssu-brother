@@ -1,6 +1,6 @@
 <?php
 function form($data, $mydata) {	// This will print html form for data update
-    echo '<a href="func/access.php"></a>';
+    echo '<p align="right"><a href="func/access.php">Log</a></p>';
 	echo '<form method="post">';
 	echo '<table>';
 	echo '<tr>';
