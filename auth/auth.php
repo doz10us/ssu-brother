@@ -50,7 +50,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 				//print_r ($result_ent);
           } else {
               $log = getip()." Access denied for user ".$username.": invalid login or password";
-              log($log);
+              getlog($log);
               die('Вы ввели неправильный логин или пароль. попробуйте еще раз<br /> <a href="index.php">Вернуться назад</a>');
           }
     }
@@ -58,13 +58,13 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     // Если пользователь найден, то пропускаем его дальше и перебрасываем на main.php
     if (!($_POST['password']=="") && $result_ent['count'] != 0) {
         $log = getip()." ".$username." successfully logged in.";
-        log($log);
+        getlog($log);
         $_SESSION['user_id'] = time();
         header('Location: data.php');
         exit;
     } else {
         $log = getip()." Access denied for user ".$username.": low permission";
-        log($log);
+        getlog($log);
         die('К сожалению, вам доступ закрыт<br /> <a href="index.php">Вернуться назад</a>');
     }
 }	

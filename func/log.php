@@ -11,7 +11,7 @@
 // $time $ip Logged out: $user
 // $time $ip String $id updated with %changed data% by $user
 
-function log($query){
+function getlog($query){
     $string = microtime()." ".$query;
     //$srvtime = $_SERVER['REQUEST_TIME'];
     echo $string;
