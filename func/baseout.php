@@ -37,7 +37,7 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '<td>update</td>';
     echo '<td>descr</td>';
     echo '<tr>';
-    $query="SELECT * FROM `netmap`";
+    $query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description FROM `netmap`";
     $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
     unset($query);
     if (mysql_num_rows($result) > 0) {
