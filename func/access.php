@@ -15,7 +15,7 @@ if (!(checkip(getip()))) die('Access Forbidden');
 if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) || (($_REQUEST['trigger']) == "AUTO")) {
     $file = file('/tmp/log_bro',  FILE_IGNORE_NEW_LINES);
     echo '<form method="post">';
-	echo '<table>';
+	echo '<table border>';
 	echo '<tr>';
     echo '<td>Время</td>';
     echo '<td>IP</td>';
@@ -35,7 +35,7 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     unset($_SESSION['user_id']);
     setcookie('login', '', 0, "/");
     setcookie('password', '', 0, "/");
-    header('Location: ../../index.php');
+    header('Location: ../index.php');
     exit;
 }
 ?>
