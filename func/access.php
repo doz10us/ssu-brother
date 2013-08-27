@@ -10,7 +10,7 @@ session_start();
 include ("ip.php");
 include ("log.php");
 
-date_default_timezone_set("Europe/Samara");
+date_default_timezone_set('Europe/Moscow');
 if (!(checkip(getip()))) die('Access Forbidden');
 
 
