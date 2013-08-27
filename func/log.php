@@ -14,7 +14,7 @@
 function log($query){
     $string = microtime()." ".$query;
     //$srvtime = $_SERVER['REQUEST_TIME'];
-    file_put_contents('/var/tmp/log_bro',$string);
+    file_put_contents('/tmp/log_bro',$string);
     return(true);
 }
 ?>
