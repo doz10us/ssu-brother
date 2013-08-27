@@ -24,9 +24,9 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     foreach ($file as $num => $content) {
         $split = split(" ", $content, 3);
         echo '<tr>';
-        echo '<td>$split[0]</td>';
-        echo '<td>$split[1]</td>';
-        echo '<td>$split[2]</td>';
+        echo '<td>'.$split[0].'</td>';
+        echo '<td>'.$split[1].'</td>';
+        echo '<td>'.$split[2].'</td>';
         echo '<tr>';
     }
     echo '</table>';
