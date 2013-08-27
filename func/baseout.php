@@ -42,18 +42,18 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     unset($query);
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
-            echo '<tr>';
-            echo '<td>.$row['INET_NTOA(ip)'].</td>';
-            echo '<td>.$row['mac'].</td>';
-            echo '<td>.$row['switch_id'].</td>';
-            echo '<td>.$row['port'].</td>';
-            echo '<td>.$row['workstation'].</td>';
-            echo '<td>.$row['building'].</td>';
-            echo '<td>.$row['floor'].</td>';
-            echo '<td>.$row['room'].</td>';
-            echo '<td>.$row['description'].</td>';
-            echo '<td>.$row['DATE(`update`)']." ".$row['TIME(`update`)'].</td>';
-            echo '</tr>';
+            echo "<tr>";
+            echo "<td>".$row['INET_NTOA(ip)']."</td>";
+            echo "<td>".$row['mac']."</td>";
+            echo "<td>".$row['switch_id']."</td>";
+            echo "<td>".$row['port']."</td>";
+            echo "<td>".$row['workstation']."</td>";
+            echo "<td>".$row['building']."</td>";
+            echo "<td>".$row['floor']."</td>";
+            echo "<td>".$row['room']."</td>";
+            echo "<td>".$row['description']."</td>";
+            echo "<td>".$row['DATE(`update`)']." ".$row['TIME(`update`)']."</td>";
+            echo "</tr>";
         }
     }
     echo '</table>';
