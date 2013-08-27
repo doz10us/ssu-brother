@@ -25,7 +25,15 @@ function form($data, $mydata, $trigger) {	// This will print html form for data 
 		echo '<p><input type="hidden" name="mac" value="'.$mydata['mac'].'"/></p>';
 		echo '<tr>';
 		echo '<td>Switch:</td>';
-		if ($data['swname'] == $mydata['swname'] && $data['port'] == $mydata['port']) { echo '<td>'.$data['swname'].':'.$data['port'].'</td>'; } else { echo '<td>'.$data['swname'].':'.$data['port'].' (<font color="red">'.$mydata['swname'].':'.$mydata['port'].'</font>)</td>'; } 
+		if (empty($data['swname']) && empty($mydata['swname']) && empty($data['port']) && empty($mydata['port'])) {
+            echo '<td><font color="red">Unknown</font></td>';
+        } else {
+            if ($data['swname'] == $mydata['swname'] && $data['port'] == $mydata['port']) {
+                echo '<td>'.$data['swname'].':'.$data['port'].'</td>';
+            } else {
+                echo '<td>'.$data['swname'].':'.$data['port'].' (<font color="red">'.$mydata['swname'].':'.$mydata['port'].'</font>)</td>';
+            }
+        }
 	} else { 
 		echo '	<td><input type="text" name="mac" value="'.$mydata['mac'].'"/></td>'; 
 	}
@@ -50,7 +58,6 @@ function form($data, $mydata, $trigger) {	// This will print html form for data 
 	echo '	<td>Комментарий:</td>';
 	echo '	<td><input type="text" name="description" value="'.$mydata['description'].'"/></td>';
 	echo '</tr>';
-//	echo '<p><input type="hidden" name="trigger" value="'.$trigger.'"/></p>';
 	echo '<p><input type="hidden" name="ip" value="'.$data['ip'].'"/></p>';
 	echo '<p><input type="hidden" name="swname" value="'.$data['swname'].'"/></p>';
 	echo '<p><input type="hidden" name="port" value="'.$data['port'].'"/></p>';
