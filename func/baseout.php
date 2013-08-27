@@ -21,7 +21,7 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
 
     $db = mysql_connect($fhhost, $fhlogin, $fhpass) or die('connect to database failed');
     mysql_set_charset('utf8');
-    mysql_select_db('netmap') or die('db not found');
+    mysql_select_db('portmap') or die('db not found');
 
     echo '<form method="post">';
     echo '<table border>';
