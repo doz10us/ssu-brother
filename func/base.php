@@ -120,6 +120,8 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 return("OK");
             }
         }
+        $string = $mydata['ip']." ".$mydata['mac']." ".$mydata['swname'].":".$mydata['port']." ".$mydata['name']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
+        getlog($string, "3");
         echo "I know you!";
     } else {
         if (!(empty($trigger))) {
@@ -128,6 +130,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
             unset($trigger);
             fhosting($data, $mydata, $trigger);
         }
+        getlog("", "4");
         echo "What's your name?";
     }
     $mydata = $temp;
