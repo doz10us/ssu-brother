@@ -13,10 +13,15 @@
 
 function getlog($query){
     $string = time()." ".$query;
+    /*switch ($code) :
+        case "0":
+            $string .= $username." logged in\n";
+            break;
+        case "1":
+    */
     //$srvtime = $_SERVER['REQUEST_TIME'];
-    echo $string;
-    file_put_contents('/tmp/log_bro',$string);
-    die();
+    //echo $string;
+    file_put_contents('/tmp/log_bro',$string, FILE_APPEND);
     return(true);
 }
 ?>
