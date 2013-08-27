@@ -7,10 +7,6 @@
  * Description: This is logging function
  */
 
-// $time $ip Logged in: $query
-// $time $ip Logged out: $query
-// $time $ip String $id updated with %changed data% by $query
-
 function getlog($query, $code){
     $string = time()." ".getip()." ";
     switch ($code) {
