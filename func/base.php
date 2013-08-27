@@ -65,7 +65,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
 
     if (!(empty($data['mac']))) { $mydata['mac'] = $data['mac']; } else { $data['mac'] = $mydata['mac']; }
     if (empty($data['mac']) && empty($mydata['mac'])) {
-        echo "empty mac <br>";
+        echo "empty mac <br>".$mydata['ip']."<br>";
         $query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE ip = INET_ATON('".$mydata['ip']."')";
         $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
     } else {
