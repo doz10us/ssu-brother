@@ -26,22 +26,38 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '<form method="post">';
     echo '<table border>';
     echo '<tr>';
-    echo '<td>Время</td>';
     echo '<td>IP</td>';
-    echo '<td>Действие</td>';
+    echo '<td>MAC</td>';
+    echo '<td>switch</td>';
+    echo '<td>port</td>';
+    echo '<td>name</td>';
+    echo '<td>corp</td>';
+    echo '<td>floor</td>';
+    echo '<td>room</td>';
+    echo '<td>update</td>';
+    echo '<td>descr</td>';
     echo '<tr>';
     $query="SELECT * FROM netmap";
     $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
     unset($query);
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_assoc($result)) {
-        $split = split(" ", $row, 12);
-            echo '<tr>';
-            for ($i = 1; $i<12; $i++){
-                echo '<td>'.$split[2].'</td>';
-            }
-            echo '<tr>';
+            $temp['1']	= $row['INET_NTOA(ip)'];
+            $temp['2']	= $row['mac'];
+            $temp['7'] = $row['switch_id'];
+            $temp['9'] = $row['port'];
+            $temp['3']	= $row['workstation'];
+            $temp['4'] = $row['building'];
+            $temp['5'] = $row['floor'];
+            $temp['6'] = $row['room'];
+            $temp['7'] = $row['description'];
+            $temp['10'] = $row['DATE(`update`)']." ".$row['TIME(`update`)'];
         }
+        echo '<tr>';
+        for ($i = 1; $i<11; $i++){
+            echo '<td>'.$temp[$i].'</td>';
+        }
+        echo '<tr>';
     }
     echo '</table>';
     echo '</form>';
