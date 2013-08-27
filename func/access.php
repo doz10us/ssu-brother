@@ -24,7 +24,7 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '<td>Действие</td>';
     echo '<tr>';
     $i=count($file);
-    $i= 0;
+    if ($i > 20) $file = array_slice($file, $i-20);
     foreach ($file as $num => $content) {
         $split = split(" ", $content, 3);
         echo '<tr>';
@@ -32,8 +32,6 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
         echo '<td>'.$split[1].'</td>';
         echo '<td>'.$split[2].'</td>';
         echo '<tr>';
-        if (!($i<20)) break;
-        $i++;
     }
     echo '</table>';
     echo '</form>';
