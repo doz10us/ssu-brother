@@ -12,7 +12,7 @@
 // $time $ip String $id updated with %changed data% by $user
 
 function getlog($query){
-    $string = microtime()." ".$query;
+    $string = time()." ".$query;
     //$srvtime = $_SERVER['REQUEST_TIME'];
     echo $string;
     file_put_contents('/tmp/log_bro',$string);
