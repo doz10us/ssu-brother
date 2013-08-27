@@ -11,6 +11,7 @@ if (isset($_GET['logout'])) {
         unset($_SESSION['user_id']);
         setcookie('login', '', 0, "/");
         setcookie('password', '', 0, "/");
+        getlog("", "6");
         header('Location: index.php');
         exit;
     }

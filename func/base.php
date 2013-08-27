@@ -129,7 +129,10 @@ function fhosting(&$data, &$mydata, &$trigger) {
             $query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
             $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
             unset($trigger);
+            $string = $mydata['ip']." ".$mydata['mac']." ".$mydata['swname'].":".$mydata['port']." ".$mydata['name']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
+            getlog($string, "5");
             fhosting($data, $mydata, $trigger);
+            return("OK");
         }
         getlog("", "4");
         echo "What's your name?";

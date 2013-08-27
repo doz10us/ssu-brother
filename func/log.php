@@ -29,12 +29,16 @@ function getlog($query, $code){
         case "4":
             $string .= "No data found \n";
             break;
+        case "5":
+            $string .= "Data written: ".$query."\n";
+            break;
+        case "6":
+            $string .= "Logged out \n";
+            break;
         default:
             $string .= " Unknown event \n";
             break;
     }
-    //$srvtime = $_SERVER['REQUEST_TIME'];
-    //echo $string;
     file_put_contents('/tmp/log_bro',$string, FILE_APPEND);
     return(true);
 }
