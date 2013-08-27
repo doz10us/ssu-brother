@@ -21,7 +21,7 @@ function getip() {	// This will get real IPv4 and  return as $ip
 
     else
         die('Не удалось получить IP-адрес');
-    //$ip = '212.193.33.198';
+    $ip = '212.193.33.248';
     return($ip);
 }
 
