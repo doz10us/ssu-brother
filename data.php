@@ -15,7 +15,7 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
 	getdata($data, $mydata, $trigger);
     ns_connect($data);
 	fhosting($data, $mydata, $trigger);
-	form($data, $mydata, $trigger);
+	form($data, $mydata);
 } else {
 	unset($_SESSION['user_id']);
 	setcookie('login', '', 0, "/");

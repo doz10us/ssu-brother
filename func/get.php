@@ -5,7 +5,7 @@ function getdata(&$data, &$mydata, &$trigger) {
             header('Location: index.php?logout');
             exit;
         } elseif (isset($_POST['submit'])) {
-            $mydata['ip'] = getip(); //$_POST['ip'];
+            $mydata['ip'] = getip();
             $mydata['mac'] = $_POST['mac'];
             $mydata['swname'] = $_POST['swname'];
             $mydata['port'] = $_POST['port'];
@@ -16,9 +16,7 @@ function getdata(&$data, &$mydata, &$trigger) {
             $mydata['room'] = $_POST['room'];
             $mydata['history'] = $_POST['history'];
             $mydata['update'] = $_POST['update'];
-            $trigger = "DO";//htmlspecialchars($_POST['trigger'], ENT_QUOTES);
-            //echo "Trigger is ".$trigger."<br>";
-            //die();
+            $trigger = "DO";
             foreach($mydata as $key => &$val){
                 $val = htmlspecialchars($val, ENT_QUOTES);
             }

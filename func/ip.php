@@ -20,7 +20,7 @@ function getip() {	// This will get real IPv4 and  return as $ip
         $ip = $_SERVER['REMOTE_ADDR'];
 
     else
-        $ip = "unknown";
+        die('Не удалось получить IP-адрес');
     //$ip = '212.193.33.198';
     return($ip);
 }
