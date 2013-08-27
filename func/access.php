@@ -6,6 +6,7 @@
  * Time: 18:51
  * Description: 
  */
+include ("ip.php");
 
 if (!(checkip(getip()))) die('Access Forbidden');
 
