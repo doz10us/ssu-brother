@@ -1,5 +1,4 @@
 <?php
-session_start();
 /**
  * Created by JetBrains PhpStorm.
  * User: buch
@@ -7,7 +6,9 @@ session_start();
  * Time: 18:51
  * Description: 
  */
+session_start();
 include ("ip.php");
+include ("log.php");
 
 if (!(checkip(getip()))) die('Access Forbidden');
 
