@@ -87,6 +87,8 @@ function form($data, $mydata) {	// This will print html form for data update
     echo '          <a href="data.php">Главная</a><br>'."\n";
     echo '          <a href="func/access.php">Логи</a><br>'."\n";
     echo '          <a href="func/baseout.php">База</a>'."\n";
+    echo '          <br>'."\n";
+    echo '          <a href="index.php?logout">Выход</a>'."\n";
 	echo '      </div>'."\n";    //<!-- .sidebar#sideLeft -->
     echo '  </div>'."\n";    //<!-- #middle-->
     echo '</div>'."\n";    //<!-- #wrapper -->

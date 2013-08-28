@@ -31,6 +31,12 @@ function getlog($query, $code){
         case "6":
             $string .= "Logged out \n";
             break;
+        case "7":
+            $string .= "Log data acquired \n";
+            break;
+        case "8":
+            $string .= "Database output acquired \n";
+            break;
         default:
             $string .= " Unknown event \n";
             break;
