@@ -9,12 +9,14 @@
 session_start();
 include ("ip.php");
 include ("log.php");
+include ("version.php");
 
 date_default_timezone_set('Europe/Moscow');
 if (!(checkip(getip()))) die('Access Forbidden');
 
 
 if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) || (($_REQUEST['trigger']) == "AUTO")) {
+    global $version;
     $file = file('/tmp/log_bro',  FILE_IGNORE_NEW_LINES);
     getlog("", "7");
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'."\n";
@@ -59,9 +61,11 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '      <div class="sidebar" id="sideLeft">'."\n";
     echo '          <a href="../data.php">Главная</a><br>'."\n";
     echo '          <a href="access.php">Логи</a><br>'."\n";
-    echo '          <a href="baseout.php">База</a>'."\n";
+    echo '          <a href="baseout.php">База</a><br>'."\n";
     echo '          <br>'."\n";
     echo '          <a href="../index.php?logout">Выход</a>'."\n";
+    echo '          <br><br><br><br><br><br>'."\n";
+    echo '          ('.$version.')<br>'."\n";
     echo '      </div>'."\n";    //<!-- .sidebar#sideLeft -->
     echo '  </div>'."\n";    //<!-- #middle-->
     echo '</div>'."\n";    //<!-- #wrapper -->

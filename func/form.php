@@ -1,5 +1,7 @@
 <?php
+include ("func/version.php");
 function form($data, $mydata) {	// This will print html form for data update
+    global $version;
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'."\n";
     echo '<html xmlns="http://www.w3.org/1999/xhtml">'."\n";
     echo '<head>'."\n";
@@ -86,10 +88,11 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '      <div class="sidebar" id="sideLeft">'."\n";
     echo '          <a href="data.php">Главная</a><br>'."\n";
     echo '          <a href="func/access.php">Логи</a><br>'."\n";
-    echo '          <a href="func/baseout.php">База</a>'."\n";
-    echo '          <br>'."\n";
+    echo '          <a href="func/baseout.php">База</a><br>'."\n";
     echo '          <br>'."\n";
     echo '          <a href="index.php?logout">Выход</a>'."\n";
+    echo '          <br><br><br><br><br><br>'."\n";
+    echo '          ('.$version.')<br>'."\n";
 	echo '      </div>'."\n";    //<!-- .sidebar#sideLeft -->
     echo '  </div>'."\n";    //<!-- #middle-->
     echo '</div>'."\n";    //<!-- #wrapper -->

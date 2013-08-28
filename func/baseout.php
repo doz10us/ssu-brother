@@ -10,11 +10,13 @@ session_start();
 include ("login.php");
 include ("log.php");
 include ("ip.php");
+include ("version.php");
 
 if (!(checkip(getip()))) die('Access Forbidden');
 
 
 if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) || (($_REQUEST['trigger']) == "AUTO")) {
+    global $version;
     global $fhhost;
     global $fhlogin;
     global $fhpass;
@@ -81,9 +83,11 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '      <div class="sidebar" id="sideLeft">'."\n";
     echo '          <a href="../data.php">Главная</a><br>'."\n";
     echo '          <a href="access.php">Логи</a><br>'."\n";
-    echo '          <a href="baseout.php">База</a>'."\n";
+    echo '          <a href="baseout.php">База</a><br>'."\n";
     echo '          <br>'."\n";
     echo '          <a href="../index.php?logout">Выход</a>'."\n";
+    echo '          <br><br><br><br><br><br>'."\n";
+    echo '          ('.$version.')<br>'."\n";
     echo '      </div>'."\n";    //<!-- .sidebar#sideLeft -->
     echo '  </div>'."\n";    //<!-- #middle-->
     echo '</div>'."\n";    //<!-- #wrapper -->
