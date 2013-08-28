@@ -1,7 +1,26 @@
 <?php
 function form($data, $mydata) {	// This will print html form for data update
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+    echo '<html xmlns="http://www.w3.org/1999/xhtml">';
+    echo '<head>';
+	echo '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
+	echo '<title></title>';
+	echo '<meta name="keywords" content="" />';
+	echo '<meta name="description" content="" />';
+	echo '<link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />';
+	echo '<!--[if lte IE 6]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen, projection" /><![endif]-->';
+    echo '</head>';
+
     echo '<p align="right"><a href="func/access.php">Log</a></p>';
     echo '<p align="right"><a href="func/baseout.php">Base</a></p>';
+    echo '<div id="wrapper">';
+	echo '<div id="header">';
+		echo '<strong>SSU Brother</strong>';
+	echo '</div>';    //<!-- #header-->
+	echo '<div id="middle">';
+		echo '<div id="container">';
+			echo '<div id="content">';
+				echo '<strong>Content:</strong>';
 	echo '<form method="post">';
 	echo '<table>';
 	echo '<tr>';
@@ -65,5 +84,14 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '<td><input type="submit" name="logout" value="Выйти"/></td></tr>';
 	echo '</table>';
 	echo '</form>';
+    echo '</div>';    //<!-- #content-->
+		echo '</div>';    //<!-- #container-->
+		echo '<div class="sidebar" id="sideLeft">';
+			echo '<strong>Left Sidebar:</strong>';
+            echo '<strong>Left Sidebar:</strong>';
+            echo '<strong>Left Sidebar:</strong>';
+		echo '</div>';    //<!-- .sidebar#sideLeft -->
+    echo '</div>';    //<!-- #middle-->
+echo '</div>';    //<!-- #wrapper -->
 }
 ?>
