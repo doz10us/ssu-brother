@@ -56,9 +56,9 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '              </div>'."\n";    //<!-- #content-->
     echo '          </div>'."\n";    //<!-- #container-->
     echo '      <div class="sidebar" id="sideLeft">'."\n";
-    echo '          <a href="data.php">Главная</a><br>'."\n";
-    echo '          <a href="func/access.php">Логи</a><br>'."\n";
-    echo '          <a href="func/baseout.php">База</a>'."\n";
+    echo '          <a href="../data.php">Главная</a><br>'."\n";
+    echo '          <a href="access.php">Логи</a><br>'."\n";
+    echo '          <a href="baseout.php">База</a>'."\n";
     echo '      </div>'."\n";    //<!-- .sidebar#sideLeft -->
     echo '  </div>'."\n";    //<!-- #middle-->
     echo '</div>'."\n";    //<!-- #wrapper -->
