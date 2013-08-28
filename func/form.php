@@ -9,7 +9,7 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '<meta name="description" content="" />';
 	echo '<link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />';
 	echo '<!--[if lte IE 6]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen, projection" /><![endif]-->';
-    echo '</head>\n';
+    echo '</head>'."\n";
     echo '<body>';
     echo '  <div id="wrapper">';
 	echo '      <div id="header">';
