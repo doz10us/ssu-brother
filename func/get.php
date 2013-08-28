@@ -5,8 +5,9 @@ function getdata(&$data, &$mydata, &$trigger) {
             header('Location: index.php?logout');
             exit;
         } elseif (isset($_POST['submit'])) {
+            $repl = array("-", ":");
             $mydata['ip'] = getip();
-            $mydata['mac'] = $_POST['mac'];
+            $mydata['mac'] = strtolower(str_replace($repl, "", $_POST['mac']));
             $mydata['swname'] = $_POST['swname'];
             $mydata['port'] = $_POST['port'];
             $mydata['name'] = $_POST['name'];
