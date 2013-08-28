@@ -9,20 +9,19 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '<meta name="description" content="" />';
 	echo '<link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />';
 	echo '<!--[if lte IE 6]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen, projection" /><![endif]-->';
-    echo '</head>';
+    echo '</head>\n';
     echo '<body>';
-    echo '<div id="wrapper">';
-	echo '<div id="header">';
-		echo '<strong>SSU Brother</strong>';
-	echo '</div>';    //<!-- #header-->
-	echo '<div id="middle">';
-		echo '<div id="container">';
-			echo '<div id="content">';
-				echo '<strong>Content:</strong>';
-	echo '<form method="post">';
-	echo '<table>';
-	echo '<tr>';
-	echo '<td>IP:</td>';
+    echo '  <div id="wrapper">';
+	echo '      <div id="header">';
+	echo '          <strong>SSU Brother</strong>';
+	echo '      </div>';    //<!-- #header-->
+	echo '      <div id="middle">';
+	echo '          <div id="container">';
+	echo '              <div id="content">';
+	echo '                  <form method="post">';
+	echo '                      <table>';
+	echo '                          <tr>';
+	echo '                              <td>IP:</td>';
 	if ($data['ip'] == $mydata['ip']) {
         echo '<td>'.$data['ip'].'</td>';
     } else {
