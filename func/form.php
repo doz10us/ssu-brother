@@ -10,7 +10,7 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '<link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />';
 	echo '<!--[if lte IE 6]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen, projection" /><![endif]-->';
     echo '</head>';
-
+    echo '<body>';
     echo '<p align="right"><a href="func/access.php">Log</a></p>';
     echo '<p align="right"><a href="func/baseout.php">Base</a></p>';
     echo '<div id="wrapper">';
@@ -93,5 +93,7 @@ function form($data, $mydata) {	// This will print html form for data update
 		echo '</div>';    //<!-- .sidebar#sideLeft -->
     echo '</div>';    //<!-- #middle-->
 echo '</div>';    //<!-- #wrapper -->
+    echo '</body>';
+    echo '</html>';
 }
 ?>
