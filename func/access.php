@@ -23,7 +23,7 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '  <title></title>'."\n";
     echo '  <meta name="keywords" content="" />'."\n";
     echo '  <meta name="description" content="" />'."\n";
-    echo '  <link rel="stylesheet" href="func/style.css" type="text/css" media="screen, projection" />'."\n";
+    echo '  <link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />'."\n";
     echo '  <!--[if lte IE 6]><link rel="stylesheet" href="func/style_ie.css" type="text/css" media="screen, projection" /><![endif]-->'."\n";
     echo '</head>'."\n";
     echo '<body>'."\n";
