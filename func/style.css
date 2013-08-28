@@ -31,8 +31,8 @@ input {
 /* Header
 -----------------------------------------------------------------------------*/
 #header {
-	height: 150px;
-	background: #FFE680;
+	height: 50px;
+	/*background: #FFE680;*/
 }
 
 
@@ -62,10 +62,10 @@ input {
 -----------------------------------------------------------------------------*/
 #sideLeft {
 	float: left;
-	width: 250px;
+	width: 50px;
 	margin-left: -100%;
 	position: relative;
-	background: #B5E3FF;
+	/*background: #B5E3FF;*/
 }
 
 
