@@ -78,15 +78,15 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '	                            <td>'.$mydata['update'].'</td>'."\n";
 	echo '                          </tr>'."\n";
 	echo '                          <tr><td><input type="submit" name="submit" value="Подтвердить"/></td>'."\n";
-	echo '                              <td><input type="submit" name="logout" value="Выйти"/></td></tr>'."\n";
+	#echo '                              <td><input type="submit" name="logout" value="Выйти"/></td></tr>'."\n";
 	echo '                      </table>'."\n";
 	echo '                  </form>'."\n";
     echo '              </div>'."\n";    //<!-- #content-->
 	echo '          </div>'."\n";    //<!-- #container-->
 	echo '      <div class="sidebar" id="sideLeft">'."\n";
-    echo '          <a href="data.php">Log</a><br>'."\n";
-    echo '          <a href="func/access.php">Log</a><br>'."\n";
-    echo '          <a href="func/baseout.php">Base</a>'."\n";
+    echo '          <a href="data.php">Главная</a><br>'."\n";
+    echo '          <a href="func/access.php">Логи</a><br>'."\n";
+    echo '          <a href="func/baseout.php">База</a>'."\n";
 	echo '      </div>'."\n";    //<!-- .sidebar#sideLeft -->
     echo '  </div>'."\n";    //<!-- #middle-->
     echo '</div>'."\n";    //<!-- #wrapper -->

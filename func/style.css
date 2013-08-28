@@ -32,7 +32,7 @@ input {
 -----------------------------------------------------------------------------*/
 #header {
 	height: 50px;
-    font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
+    font: 40px/50px Arial, Tahoma, Verdana, sans-serif;
 	/*background: #FFE680;*/
 }
 
@@ -55,8 +55,8 @@ input {
 	overflow: hidden;
 }
 #content {
-    font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
-	padding: 0 0 0 270px;
+    font: 18px/24px Arial, Tahoma, Verdana, sans-serif;
+	padding: 0 0 0 95px;
 }
 
 
@@ -65,9 +65,9 @@ input {
 #sideLeft {
 	float: left;
 	width: 50px;
-	margin-left: -100%;
+	margin-left: -98%;
 	position: relative;
-    font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
+    font: 18px/18px Arial, Tahoma, Verdana, sans-serif;
 	/*background: #B5E3FF;*/
 }
 
