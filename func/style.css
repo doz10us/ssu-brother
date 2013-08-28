@@ -32,6 +32,7 @@ input {
 -----------------------------------------------------------------------------*/
 #header {
 	height: 50px;
+    font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
 	/*background: #FFE680;*/
 }
 
@@ -54,6 +55,7 @@ input {
 	overflow: hidden;
 }
 #content {
+    font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
 	padding: 0 0 0 270px;
 }
 
@@ -65,6 +67,7 @@ input {
 	width: 50px;
 	margin-left: -100%;
 	position: relative;
+    font: 12px/18px Arial, Tahoma, Verdana, sans-serif;
 	/*background: #B5E3FF;*/
 }
 
