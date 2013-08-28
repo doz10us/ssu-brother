@@ -11,8 +11,6 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '<!--[if lte IE 6]><link rel="stylesheet" href="style_ie.css" type="text/css" media="screen, projection" /><![endif]-->';
     echo '</head>';
     echo '<body>';
-    echo '<p align="right"><a href="func/access.php">Log</a></p>';
-    echo '<p align="right"><a href="func/baseout.php">Base</a></p>';
     echo '<div id="wrapper">';
 	echo '<div id="header">';
 		echo '<strong>SSU Brother</strong>';
@@ -87,9 +85,8 @@ function form($data, $mydata) {	// This will print html form for data update
     echo '</div>';    //<!-- #content-->
 		echo '</div>';    //<!-- #container-->
 		echo '<div class="sidebar" id="sideLeft">';
-			echo '<strong>Left Sidebar:</strong>';
-            echo '<strong>Left Sidebar:</strong>';
-            echo '<strong>Left Sidebar:</strong>';
+    echo '<a href="func/access.php">Log</a>';
+    echo '<a href="func/baseout.php">Base</a>';
 		echo '</div>';    //<!-- .sidebar#sideLeft -->
     echo '</div>';    //<!-- #middle-->
 echo '</div>';    //<!-- #wrapper -->
