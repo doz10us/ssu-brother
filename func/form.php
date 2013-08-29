@@ -24,10 +24,10 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '                      <table>'."\n";
 	echo '                          <tr>'."\n";
 	echo '                              <td>IP:</td>'."\n";
-	if ($data['ip'] == $mydata['ip']) {
+	if ($data['ip'] == $mydata['INET_NTOA(ip)']) {
         echo '                      <td>'.$data['ip'].'</td>'."\n";
     } else {
-        echo '                      <td>'.$data['ip'].' (<font color="red">'.$mydata['ip'].'</font>)</td>'."\n";
+        echo '                      <td>'.$data['ip'].' (<font color="red">'.$mydata['INET_NTOA(ip)'].'</font>)</td>'."\n";
     }
 	echo '                          </tr>'."\n";
 	echo '                          <tr>'."\n";
@@ -38,13 +38,13 @@ function form($data, $mydata) {	// This will print html form for data update
 		echo '                  <p><input type="hidden" name="mac" value="'.$mydata['mac'].'"/></p>'."\n";
 		echo '                  <tr>'."\n";
 		echo '                      <td>Switch:</td>'."\n";
-		if (empty($data['swname']) && empty($mydata['swname']) && empty($data['port']) && empty($mydata['port'])) {
+		if (empty($data['swname']) && empty($mydata['switch_id']) && empty($data['port']) && empty($mydata['port'])) {
             echo '              <td><font color="red">Unknown</font></td>'."\n";
         } else {
-            if ($data['swname'] == $mydata['swname'] && $data['port'] == $mydata['port']) {
+            if ($data['swname'] == $mydata['switch_id'] && $data['port'] == $mydata['port']) {
                 echo '      <td>'.$data['swname'].':'.$data['port'].'</td>'."\n";
             } else {
-                echo '<td>'.$data['swname'].':'.$data['port'].' (<font color="red">'.$mydata['swname'].':'.$mydata['port'].'</font>)</td>'."\n";
+                echo '<td>'.$data['swname'].':'.$data['port'].' (<font color="red">'.$mydata['switch_id'].':'.$mydata['port'].'</font>)</td>'."\n";
             }
         }
 	} else { 
@@ -65,7 +65,7 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '                          </tr>'."\n";
 	echo '                          <tr>'."\n";
 	echo '	                            <td>Имя машины:</td>'."\n";
-	echo '	                            <td><input type="text" name="name" value="'.$mydata['name'].'"/></td>'."\n";
+	echo '	                            <td><input type="text" name="name" value="'.$mydata['workstation'].'"/></td>'."\n";
 	echo '                          </tr>'."\n";
 	echo '                          <tr>'."\n";
 	echo '	                            <td>Комментарий:</td>'."\n";
@@ -74,10 +74,10 @@ function form($data, $mydata) {	// This will print html form for data update
 	echo '                          <p><input type="hidden" name="swname" value="'.$data['swname'].'"/></p>'."\n";
 	echo '                          <p><input type="hidden" name="port" value="'.$data['port'].'"/></p>'."\n";
 	echo '                          <p><input type="hidden" name="history" value="'.$mydata['history'].'"/></p>'."\n";
-	echo '                          <p><input type="hidden" name="update" value="'.$mydata['update'].'"/></p>'."\n";
+	echo '                          <p><input type="hidden" name="update" value="'.$mydata['DATE(`update`)']." ".$mydata['TIME(`update`)'].'"/></p>'."\n";
 	echo '                          <tr>'."\n";
 	echo '	                            <td>Обновлено:</td>'."\n";
-	echo '	                            <td>'.$mydata['update'].'</td>'."\n";
+	echo '	                            <td>'.$mydata['DATE(`update`)']." ".$mydata['TIME(`update`)'].'</td>'."\n";
 	echo '                          </tr>'."\n";
 	echo '                          <tr><td><input type="submit" name="submit" value="Подтвердить"/></td>'."\n";
 	#echo '                              <td><input type="submit" name="logout" value="Выйти"/></td></tr>'."\n";
