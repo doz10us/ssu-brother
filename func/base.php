@@ -9,20 +9,24 @@ function connect($name){
     global $fhhost;
     global $fhlogin;
     global $fhpass;
+    $fhbase = "portmap";
+    $nsbase = "netmap";
 
     switch ($name) {
         case "fh":
             $db = mysql_connect($fhhost, $fhlogin, $fhpass) or die('Database unreachable');
+            $base = $fhbase;
             break;
         case "ns":
             $db = mysql_connect($nshost, $nslogin, $nspass) or die('Database unreachable');
+            $base = $nsbase;
             break;
         default:
             die();
     }
 
     mysql_set_charset('utf8');
-    mysql_select_db('netmap') or die('Database not exist');
+    mysql_select_db($base) or die('Database not exist');
     return($db);
 }
 
