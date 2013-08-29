@@ -10,6 +10,7 @@ function connect(){
     $db = mysql_connect($nshost, $nslogin, $nspass) or die('Database unreachable');
     mysql_set_charset('utf8');
     mysql_select_db('netmap') or die('Database not exist');
+    return($db);
 }
 
 function execute($query){
@@ -17,7 +18,7 @@ function execute($query){
 }
 
 function ns_connect(&$data) {
-    connect();
+    $db = connect();
     if (empty($data['mac'])) {
         // Get MAC from IP
         /*$query = "select mac from unetmap_host where INET_NTOA(ip) = '".$data['ip']."'";
@@ -28,7 +29,7 @@ function ns_connect(&$data) {
 		        $data['mac']=$row['mac'];
             }
         }*/
-        $data['mac'] = execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'");
+        $data['mac'] = array_pop(array_values(execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'")));
         print_r($data);
     }
     if (isset($data['mac'])) {
