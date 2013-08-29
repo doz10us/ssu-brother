@@ -28,7 +28,7 @@ function ns_connect(&$data) {
 		        $data['mac']=$row['mac'];
             }
         }*/
-        $data = execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'");
+        $data['mac'] = execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'");
         print_r($data);
     }
     if (isset($data['mac'])) {
