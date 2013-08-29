@@ -1,28 +1,35 @@
 <?php
 include ("login.php");
 include ("log.php");
-function ns_connect(&$data) {
+
+function connect(){
     global $nshost;
     global $nslogin;
     global $nspass;
-   // $hostname = $nshost;
-   // $username = $nslogin;
-   // $password = $nspass;
 
-    $db = mysql_connect($nshost, $nslogin, $nspass) or die('connect to database failed');
+    $db = mysql_connect($nshost, $nslogin, $nspass) or die('Database unreachable');
     mysql_set_charset('utf8');
-    mysql_select_db('netmap') or die('db not found');
+    mysql_select_db('netmap') or die('Database not exist');
+}
 
+function execute($query){
+    return(mysql_fetch_assoc(mysql_query($query)));
+}
+
+function ns_connect(&$data) {
+    connect();
     if (empty($data['mac'])) {
         // Get MAC from IP
-        $query = "select mac from unetmap_host where INET_NTOA(ip) = '".$data['ip']."'";
+        /*$query = "select mac from unetmap_host where INET_NTOA(ip) = '".$data['ip']."'";
         $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
 
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_assoc($result)) {
 		        $data['mac']=$row['mac'];
             }
-        }
+        }*/
+        $data = execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'");
+        print_r($data);
     }
     if (isset($data['mac'])) {
         // Get Switch ID and port where MAC was seen last time
