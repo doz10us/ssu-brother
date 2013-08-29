@@ -66,7 +66,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         //$result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
     }
     //unset($query);
-    print_r($temp);
+    //print_r($temp);
     $result = NULL;
     foreach($temp as $key => $val){
         if (!(empty($val))) { $result = "full"; break;}
