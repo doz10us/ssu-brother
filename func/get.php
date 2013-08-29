@@ -6,11 +6,11 @@ function getdata(&$data, &$mydata, &$trigger) {
             exit;
         } elseif (isset($_POST['submit'])) {
             $repl = array("-", ":");
-            $mydata['ip'] = getip();
+            $mydata['INET_NTOA(ip)'] = getip();
             $mydata['mac'] = strtolower(str_replace($repl, "", $_POST['mac']));
-            $mydata['swname'] = $_POST['swname'];
+            $mydata['switch_id'] = $_POST['swname'];
             $mydata['port'] = $_POST['port'];
-            $mydata['name'] = $_POST['name'];
+            $mydata['workstation'] = $_POST['name'];
             $mydata['building'] = $_POST['building'];
             $mydata['floor'] = $_POST['floor'];
             $mydata['description'] = $_POST['description'];
@@ -27,13 +27,13 @@ function getdata(&$data, &$mydata, &$trigger) {
             }
             unset($val);
             $data = $mydata;
-            $mydata['name'] = iconv('WINDOWS-1251', 'UTF-8',$mydata['name']);
+            $mydata['workstation'] = iconv('WINDOWS-1251', 'UTF-8',$mydata['workstation']);
             $mydata['room'] = iconv('WINDOWS-1251', 'UTF-8',$mydata['room']);
         } else {
-            $data['ip'] = getip();
+            $data['INET_NTOA(ip)'] = getip();
         }
     } else {
-        $data['ip'] = getip();
+        $data['INET_NTOA(ip)'] = getip();
     }
 }
 ?>

@@ -37,27 +37,23 @@ function execute($query){
 function ns_connect(&$data) {
     $db = connect("ns");
     if (empty($data['mac'])) {
-        // Get MAC from IP
-        $data['mac'] = array_pop(array_values(execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'")));
+        $data['mac'] = array_pop(array_values(execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['INET_NTOA(ip)']."'")));
     }
     if (isset($data['mac'])) {
-        // Get Switch ID and port where MAC was seen last time
-        // And get switch name by its id
-        $data['swname'] = array_pop(array_values(execute("SELECT name FROM unetmap_host WHERE id IN (SELECT switch_id FROM unetmap_host WHERE mac = '".$data['mac']."')")));
+        $data['switch_id'] = array_pop(array_values(execute("SELECT name FROM unetmap_host WHERE id IN (SELECT switch_id FROM unetmap_host WHERE mac = '".$data['mac']."')")));
         $data['port'] = array_pop(array_values(execute("SELECT port FROM unetmap_host WHERE mac = '".$data['mac']."'")));
     }
-
     mysql_close($db);
     return("OK");
 }
 
 function fhosting(&$data, &$mydata, &$trigger) {
     $db = connect("fh");
-    $temp = $data;
+    //$temp = $data;
 
     if (!(empty($data['mac']))) { $mydata['mac'] = $data['mac']; } else { $data['mac'] = $mydata['mac']; }
     if (empty($data['mac']) && empty($mydata['mac'])) {
-        $temp = execute("SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE ip = INET_ATON('".$data['ip']."')");
+        $temp = execute("SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE ip = INET_ATON('".$data['INET_NTOA(ip)']."')");
     } else {
         $temp = execute("SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE mac = '".$data['mac']."'");
     }
@@ -82,7 +78,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
         if (empty($data['mac'])) {
             $data['mac'] = $temp['mac'];
             ns_connect($data);
-            $mydata['swname'] = $data['swname'];
+            $mydata['switch_id'] = $data['switch_id'];
             $mydata['port'] = $data['port'];
         }
         //echo "Trigger is".$trigger."<br>";
@@ -91,21 +87,21 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 $query="";
                 //print_r($mydata);
                 //print_r($temp);
-                if ($mydata['ip'] != $temp['INET_NTOA(ip)'] ) $query .= "`ip`=INET_ATON('".$mydata['ip']."')";
+                if ($mydata['INET_NTOA(ip)'] != $temp['INET_NTOA(ip)'] ) $query .= "`ip`=INET_ATON('".$mydata['INET_NTOA(ip)']."')";
                 if ($mydata['mac'] != $temp['mac']) $query .= ",`mac`='".$mydata['mac']."'";
                 if ($mydata['port'] != $temp['port']) $query .= ",`port`='".$mydata['port']."'";
-                if ($mydata['swname'] != $temp['switch_id']) $query .= ",`switch_id`='".$mydata['swname']."'";
-                if ($mydata['name'] != $temp['workstation']) $query .= ",`workstation`='".$mydata['name']."'";
+                if ($mydata['switch_id'] != $temp['switch_id']) $query .= ",`switch_id`='".$mydata['switch_id']."'";
+                if ($mydata['workstation'] != $temp['workstation']) $query .= ",`workstation`='".$mydata['workstation']."'";
                 if ($mydata['building'] != $temp['building']) $query .= ",`building`='".$mydata['building']."'";
                 if ($mydata['floor'] != $temp['floor']) $query .= ",`floor`='".$mydata['floor']."'";
                 if ($mydata['room'] != $temp['room']) $query .= ",`room`='".$mydata['room']."'";
                 if ($mydata['description'] != $temp['description']) $query .= ",`description`='".$mydata['description']."'";
                 if (!(empty($query))) {
-                    execute("UPDATE `netmap` SET `ip`=INET_ATON('".$mydata['ip']."'),`mac`='".$mydata['mac']."',`port`='".$mydata['port']."',`switch_id`='".$mydata['swname']."',`workstation`='".$mydata['name']."',`building`='".$mydata['building']."',`floor`='".$mydata['floor']."',`room`='".$mydata['room']."',`description`='".$mydata['description']."',`history`='".$mydata['mac']." ".$mydata['ip']." ".$mydata['port']." ".$mydata['swname']." ".$mydata['name']." ".$mydata['building']." ".$mydata['floor']." ".$mydata['room']." ".$mydata['description']." ".$temp['update']." \n".$temp['history']."' WHERE `mac`='".$temp['mac']."' OR `ip`=INET_ATON('".$temp['ip']."');");
+                    execute("UPDATE `netmap` SET `ip`=INET_ATON('".$mydata['INET_NTOA(ip)']."'),`mac`='".$mydata['mac']."',`port`='".$mydata['port']."',`switch_id`='".$mydata['switch_id']."',`workstation`='".$mydata['workstation']."',`building`='".$mydata['building']."',`floor`='".$mydata['floor']."',`room`='".$mydata['room']."',`description`='".$mydata['description']."',`history`='".$mydata['mac']." ".$mydata['INET_NTOA(ip)']." ".$mydata['port']." ".$mydata['switch_id']." ".$mydata['workstation']." ".$mydata['building']." ".$mydata['floor']." ".$mydata['room']." ".$mydata['description']." ".$temp['update']." \n".$temp['history']."' WHERE `mac`='".$temp['mac']."' OR `ip`=INET_ATON('".$temp['ip']."');");
                 }
                 unset($trigger);
-                //$string = $mydata['ip']." ".$mydata['mac']." ".$mydata['swname'].":".$mydata['port']." ".$mydata['name']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
-                getlog($mydata['ip']." ".$mydata['mac']." ".$mydata['swname'].":".$mydata['port']." ".$mydata['name']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'], "5");
+                //$string = $mydata['INET_NTOA(ip)']." ".$mydata['mac']." ".$mydata['switch_id'].":".$mydata['port']." ".$mydata['workstation']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
+                getlog($mydata['INET_NTOA(ip)']." ".$mydata['mac']." ".$mydata['switch_id'].":".$mydata['port']." ".$mydata['workstation']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'], "5");
                 fhosting($data, $mydata, $trigger);
                 return("OK");
             }
@@ -115,12 +111,12 @@ function fhosting(&$data, &$mydata, &$trigger) {
         //echo "I know you!";
     } else {
         if (!(empty($trigger))) {
-            //$query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
+            //$query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['INET_NTOA(ip)']."'),'".$mydata['port']."','".$mydata['switch_id']."','".$mydata['workstation']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
             //$result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
-            execute("INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')");
+            execute("INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['INET_NTOA(ip)']."'),'".$mydata['port']."','".$mydata['switch_id']."','".$mydata['workstation']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')");
             unset($trigger);
-            $string = $mydata['ip']." ".$mydata['mac']." ".$mydata['swname'].":".$mydata['port']." ".$mydata['name']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
-            getlog($string, "5");
+            //$string = $mydata['INET_NTOA(ip)']." ".$mydata['mac']." ".$mydata['switch_id'].":".$mydata['port']." ".$mydata['workstation']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
+            getlog($mydata['INET_NTOA(ip)']." ".$mydata['mac']." ".$mydata['switch_id'].":".$mydata['port']." ".$mydata['workstation']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'], "5");
             fhosting($data, $mydata, $trigger);
             return("OK");
         }

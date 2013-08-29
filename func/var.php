@@ -1,13 +1,13 @@
 <?php
 $data = array(
-	"ip"	=> "",
+	"INET_NTOA(ip)"	=> "",
 	"mac"	=> "",
-	"name"	=> "",
+	"workstation"	=> "",
 	"building"	=> "",
 	"floor"	=> "",
 	"room"	=> "",
 	"description"	=> "",
-	"swname"	=> "",
+	"switch_id"	=> "",
 	"port"	=> "",
 	"history" => "",
 	"update" => "",
