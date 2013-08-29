@@ -97,11 +97,11 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 $query="";
                 //print_r($mydata);
                 //print_r($temp);
-                if ($mydata['ip'] != $temp['ip'] ) $query .= "`ip`=INET_ATON('".$mydata['ip']."')";
+                if ($mydata['ip'] != $temp['INET_NTOA(ip)'] ) $query .= "`ip`=INET_ATON('".$mydata['ip']."')";
                 if ($mydata['mac'] != $temp['mac']) $query .= ",`mac`='".$mydata['mac']."'";
                 if ($mydata['port'] != $temp['port']) $query .= ",`port`='".$mydata['port']."'";
-                if ($mydata['swname'] != $temp['swname']) $query .= ",`switch_id`='".$mydata['swname']."'";
-                if ($mydata['name'] != $temp['name']) $query .= ",`workstation`='".$mydata['name']."'";
+                if ($mydata['swname'] != $temp['switch_id']) $query .= ",`switch_id`='".$mydata['swname']."'";
+                if ($mydata['name'] != $temp['workstation']) $query .= ",`workstation`='".$mydata['name']."'";
                 if ($mydata['building'] != $temp['building']) $query .= ",`building`='".$mydata['building']."'";
                 if ($mydata['floor'] != $temp['floor']) $query .= ",`floor`='".$mydata['floor']."'";
                 if ($mydata['room'] != $temp['room']) $query .= ",`room`='".$mydata['room']."'";
@@ -122,7 +122,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
                 return("OK");
             }
         }
-        $string = $temp['ip']." ".$temp['mac']." ".$temp['swname'].":".$temp['port']." ".$temp['name']." ".$temp['building']."-".$temp['floor']."-".$temp['room']." ".$temp['description'];
+        $string = $temp['INET_NTOA(ip)']." ".$temp['mac']." ".$temp['switch_id'].":".$temp['port']." ".$temp['workstation']." ".$temp['building']."-".$temp['floor']."-".$temp['room']." ".$temp['description'];
         getlog($string, "3");
         //echo "I know you!";
     } else {
