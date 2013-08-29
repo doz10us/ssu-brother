@@ -2,12 +2,25 @@
 include ("login.php");
 include ("log.php");
 
-function connect(){
+function connect($name){
     global $nshost;
     global $nslogin;
     global $nspass;
+    global $fhhost;
+    global $fhlogin;
+    global $fhpass;
 
-    $db = mysql_connect($nshost, $nslogin, $nspass) or die('Database unreachable');
+    switch ($name) {
+        case "fh":
+            $db = mysql_connect($fhhost, $fhlogin, $fhpass) or die('Database unreachable');
+            break;
+        case "ns":
+            $db = mysql_connect($nshost, $nslogin, $nspass) or die('Database unreachable');
+            break;
+        default:
+            die();
+    }
+
     mysql_set_charset('utf8');
     mysql_select_db('netmap') or die('Database not exist');
     return($db);
@@ -18,41 +31,14 @@ function execute($query){
 }
 
 function ns_connect(&$data) {
-    $db = connect();
+    $db = connect("ns");
     if (empty($data['mac'])) {
         // Get MAC from IP
-        /*$query = "select mac from unetmap_host where INET_NTOA(ip) = '".$data['ip']."'";
-        $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
-
-        if (mysql_num_rows($result) > 0) {
-            while ($row = mysql_fetch_assoc($result)) {
-		        $data['mac']=$row['mac'];
-            }
-        }*/
         $data['mac'] = array_pop(array_values(execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'")));
-        //print_r($data);
     }
     if (isset($data['mac'])) {
-        /*// Get Switch ID and port where MAC was seen last time
-        $query = "Select switch_id, port from unetmap_host where mac = '".$data['mac']."'";
-        $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
-
-        if (mysql_num_rows($result) > 0) {
-            while ($row = mysql_fetch_assoc($result)) {
-		        $data['port']=$row['port'];
-		        $data['swname']=$row['switch_id'];
-            }
-        }
-
+        // Get Switch ID and port where MAC was seen last time
         // And get switch name by its id
-        $query = "SELECT name FROM unetmap_host WHERE id = '".$data['swname']."'";
-        $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' . mysql_error() . ' query: ' . $query);
-
-        if (mysql_num_rows($result) > 0) {
-            while ($row = mysql_fetch_assoc($result)) {
-		        $data['swname']=$row['name'];
-            }
-        }*/
         $data['swname'] = array_pop(array_values(execute("SELECT name FROM unetmap_host WHERE id IN (SELECT switch_id FROM unetmap_host WHERE mac = '".$data['mac']."')")));
         $data['port'] = array_pop(array_values(execute("SELECT port FROM unetmap_host WHERE mac = '".$data['mac']."'")));
     }
@@ -62,28 +48,26 @@ function ns_connect(&$data) {
 }
 
 function fhosting(&$data, &$mydata, &$trigger) {
-    global $fhhost;
-    global $fhlogin;
-    global $fhpass;
-    $hostname = $fhhost;
-    $username = $fhlogin;
-    $password = $fhpass;
+    $db = connect("fh");
     $temp = $data;
-
-    $db = mysql_connect($hostname, $username, $password) or die('connect to database failed');
-    mysql_select_db('portmap') or die('db not found');
 
     if (!(empty($data['mac']))) { $mydata['mac'] = $data['mac']; } else { $data['mac'] = $mydata['mac']; }
     if (empty($data['mac']) && empty($mydata['mac'])) {
-        $query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE ip = INET_ATON('".$data['ip']."')";
-        $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
+        $temp = execute("SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE ip = INET_ATON('".$data['ip']."')");
+        //$query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE ip = INET_ATON('".$data['ip']."')";
+        //$result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
     } else {
-        $query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE mac = '".$data['mac']."'";
-        $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
+        $temp = execute("SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE mac = '".$data['mac']."'");
+        //$query="SELECT INET_NTOA(ip),mac,port,switch_id,workstation,building,floor,room,DATE(`update`),TIME(`update`),description,history FROM netmap WHERE mac = '".$data['mac']."'";
+        //$result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
     }
-    unset($query);
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_assoc($result)) {
+    //unset($query);
+    $result = NULL;
+    foreach($temp as $key => $val){
+        if (!(empty($val))) { $result = "full"; break;}
+    }
+    if (isset($result)) {
+        /*while ($row = mysql_fetch_assoc($result)) {
             $temp['ip']	= $row['INET_NTOA(ip)'];
             $temp['mac']	= $row['mac'];
             $temp['name']	= $row['workstation'];
@@ -95,7 +79,7 @@ function fhosting(&$data, &$mydata, &$trigger) {
             $temp['port'] = $row['port'];
             $temp['update'] = $row['DATE(`update`)']." ".$row['TIME(`update`)'];
             $temp['history'] = $row['history'];
-        }
+        }*/
         if (empty($data['mac'])) {
             $data['mac'] = $temp['mac'];
             ns_connect($data);
@@ -138,8 +122,9 @@ function fhosting(&$data, &$mydata, &$trigger) {
         //echo "I know you!";
     } else {
         if (!(empty($trigger))) {
-            $query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
-            $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
+            //$query="INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')";
+            //$result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
+            execute("INSERT INTO netmap (mac,ip,port,switch_id,workstation,building,floor,room,description) VALUES ('".$mydata['mac']."',INET_ATON('".$mydata['ip']."'),'".$mydata['port']."','".$mydata['swname']."','".$mydata['name']."','".$mydata['building']."','".$mydata['floor']."','".$mydata['room']."','".$mydata['description']."')");
             unset($trigger);
             $string = $mydata['ip']." ".$mydata['mac']." ".$mydata['swname'].":".$mydata['port']." ".$mydata['name']." ".$mydata['building']."-".$mydata['floor']."-".$mydata['room']." ".$mydata['description'];
             getlog($string, "5");
