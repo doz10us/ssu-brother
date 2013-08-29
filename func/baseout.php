@@ -26,7 +26,6 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     mysql_select_db('portmap') or die('db not found');
 
     getlog("", "8");
-    //echo '<form method="post">';
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'."\n";
     echo '<html xmlns="http://www.w3.org/1999/xhtml">'."\n";
     echo '<head>'."\n";
@@ -93,7 +92,6 @@ if (((isset($_SESSION['user_id']) && ((time() - $_SESSION['user_id']) < 300 ))) 
     echo '</div>'."\n";    //<!-- #wrapper -->
     echo '</body>'."\n";
     echo '</html>'."\n";
-    //echo '</form>';
 } else {
     unset($_SESSION['user_id']);
     setcookie('login', '', 0, "/");
