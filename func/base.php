@@ -30,10 +30,10 @@ function ns_connect(&$data) {
             }
         }*/
         $data['mac'] = array_pop(array_values(execute("SELECT mac FROM unetmap_host WHERE INET_NTOA(ip) = '".$data['ip']."'")));
-        print_r($data);
+        //print_r($data);
     }
     if (isset($data['mac'])) {
-        // Get Switch ID and port where MAC was seen last time
+        /*// Get Switch ID and port where MAC was seen last time
         $query = "Select switch_id, port from unetmap_host where mac = '".$data['mac']."'";
         $result = mysql_query($query) or trigger_error(mysql_errno() . ' ' .mysql_error() . ' query: ' . $query);
 
@@ -52,7 +52,9 @@ function ns_connect(&$data) {
             while ($row = mysql_fetch_assoc($result)) {
 		        $data['swname']=$row['name'];
             }
-        }
+        }*/
+        $data['swname'] = array_pop(array_values(execute("SELECT name FROM unetmap_host WHERE id IN (SELECT switch_id FROM unetmap_host WHERE mac = '".$data['mac']."')")));
+        $data['port'] = array_pop(array_values(execute("SELECT port FROM unetmap_host WHERE mac = '".$data['mac']."'")));
     }
 
     mysql_close($db);
