@@ -32,6 +32,7 @@ function connect($name){
 
 function execute($query){
     $result = mysql_query($query);
+    echo "gettype($result)";
     if (is_array($result))
         return(mysql_fetch_assoc($result));
     elseif (is_bool($result))
