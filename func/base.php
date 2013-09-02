@@ -37,7 +37,7 @@ function execute($query){
     elseif (is_bool($result))
         return($result);
     else
-        die();
+        die('WAT?');
 }
 
 function ns_connect(&$data) {
