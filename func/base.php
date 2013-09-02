@@ -31,7 +31,13 @@ function connect($name){
 }
 
 function execute($query){
-    return(mysql_fetch_assoc(mysql_query($query)));
+    $result = mysql_query($query);
+    if (is_array($result))
+        return(mysql_fetch_assoc($result));
+    elseif (is_bool($result))
+        return($result);
+    else
+        die();
 }
 
 function ns_connect(&$data) {
